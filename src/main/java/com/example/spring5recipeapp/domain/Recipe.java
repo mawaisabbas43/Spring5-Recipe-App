@@ -1,12 +1,17 @@
 package com.example.spring5recipeapp.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"categories","ingredients","notes"})
 @Entity
 public class Recipe {
     @Id
@@ -36,7 +41,8 @@ public class Recipe {
 
 
     public void setNotes(Notes notes) {
-        notes.setRecipe(this);
+        if(notes!=null)
+            notes.setRecipe(this);
         this.notes = notes;
     }
 
